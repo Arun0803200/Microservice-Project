@@ -6,10 +6,12 @@ import axios, { AxiosRequestConfig } from 'axios';
 const bcrypt = require('bcrypt');
 import * as path from 'path';
 import * as fs from 'fs';
+import { GRPCRequest } from '../../grpc/grpcRequest';
 @JsonController('/banner')
 export class bannerController {
     constructor(
-      private bulkImportService: BulkImportService
+      private bulkImportService: BulkImportService,
+      private grpcRequest: GRPCRequest
     ) {}
 
     // create banner
@@ -41,10 +43,12 @@ export class bannerController {
     @Get()
     public async getBanner(@Res() response: any): Promise<any> {
         const bannerData = await banner.find().limit(2);
+        const microValue = await this.grpcRequest.calls('ADMIN_SERVICE', 'BOOKING_SERVICE', 'FIND', {where: {id: 9}})
             const successResponse = {
                 status: 1,
                 message: 'Successfully get the banner list !!',
-                data: bannerData
+                data: bannerData,
+                microValue
             };
             return response.status(200).send(successResponse);
     }

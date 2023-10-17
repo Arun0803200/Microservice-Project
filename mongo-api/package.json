@@ -11,6 +11,8 @@
       "typescript": "^4.5.2"
    },
    "dependencies": {
+      "@grpc/grpc-js": "^1.9.5",
+      "@grpc/proto-loader": "^0.7.10",
       "@types/mongodb": "^4.0.7",
       "@types/mongoose": "^5.11.97",
       "amqplib": "^0.10.3",
