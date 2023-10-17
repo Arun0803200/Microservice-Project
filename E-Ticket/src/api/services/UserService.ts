@@ -27,6 +27,10 @@ export class UserService {
         return await this.userRepository.findOne(userData);
     }
 
+    public async find(data: any): Promise<any> {
+        return await this.userRepository.find(data)
+    }
+
     // Find All The User
     public async findAll(): Promise<any> {
         return await this.userRepository.find();

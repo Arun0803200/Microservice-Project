@@ -1,8 +1,8 @@
 import { Service } from "typedi";
-import { BookingService } from "../services/BookingService";
+import { UserService } from "../services/UserService";
 export class GRPCProvider {
     constructor(
-        private bookingService: BookingService
+        private userService: UserService
     ) {}
 
     public async grpc(): Promise<void> {
@@ -24,7 +24,7 @@ export class GRPCProvider {
             const operationName = call.request.operationName;
             if (serviceName === 'BOOKING_SERVICE') {
                 if (operationName === 'FIND') {
-                    data = this.bookingService.find(payload);
+                    data = this.userService.find(payload);
                 }
             }
             callback(undefined, {
@@ -36,7 +36,7 @@ export class GRPCProvider {
         }
 
         const server = new grpc.Server();
-        server.addService(admin_docctor_micro.serviceProvider.Service, {ServiceReq: grpsc});
+        server.addService(admin_docctor_micro.serviceProvider.service, {ServiceReq: grpsc});
         server.bindAsync('localhost:50001', grpc.ServerCredentials.createInsecure(), () => {
             server.start();
         });
