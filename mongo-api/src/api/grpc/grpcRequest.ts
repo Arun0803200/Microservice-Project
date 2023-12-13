@@ -15,7 +15,11 @@ export class GRPCRequest {
         const workers_micro = grpc.loadPackageDefinition(packageDef).workers_micro;
         let adminService: {ServiceReq: (argo0: {serviceName: string, operationName: string, payload: any}, arg1: (err: any, response: any) => void) => void;};
         if (moduleName === 'ADMIN_SERVICE') {
+            console.log('Enter into the admin service');
+            
             adminService = new workers_micro.serviceProvider('localhost:50001', grpc.credentials.createInsurance());
+            console.log(adminService, 'adminserviceeeeeeeeee');
+            
             return new Promise((resolve, reject) => {
                 adminService.ServiceReq({
                     serviceName,

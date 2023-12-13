@@ -1,4 +1,4 @@
-import { Body, JsonController, Param, Post, Put, Res } from "routing-controllers";
+import { Body, Get, JsonController, Param, Post, Put, Res } from "routing-controllers";
 import { Not } from "typeorm";
 import { Founder } from "../models/Founder";
 import { FounderService } from "../services/FounderService";
@@ -91,6 +91,12 @@ export class FounderController {
             return response.status(200).send(errorMessage);
         }
 
+    }
+
+    @Get()
+    public async getFounder(@Res() response: any): Promise<any> {
+        const findFounder = await this.founderService.findAll();
+        return response.status(200).send({status: 1, message: 'Successfully got founder list !!', data: findFounder});
     }
 
     // Update Founder
