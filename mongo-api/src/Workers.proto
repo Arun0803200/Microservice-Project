@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package workers_micro;
+package admin_doctor_micro;
 
 service serviceProvider {
     rpc ServiceReq(reqData) returns(resData) {}
