@@ -12,12 +12,12 @@ message reqData {
     string payload = 3;
 }
 
-message resData {
+message resStruct {
     int32 status = 1;
     string message = 2;
     string data = 3;
 }
 
-message resStruct {
+message resData {
     resStruct response = 1;
 }
