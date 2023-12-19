@@ -1,5 +1,6 @@
 import { Service } from "typedi";
 import { UserService } from "../services/UserService";
+@Service()
 export class GRPCProvider {
     constructor(
         private userService: UserService
@@ -20,9 +21,12 @@ export class GRPCProvider {
         const grpsc = async(call, callback) => {
             let data;
             const payload = JSON.parse(call.request.payload);
+            console.log(payload, 'payloaddddd');
+            
             const serviceName = call.request.serviceName;
             const operationName = call.request.operationName;
             if (serviceName === 'BOOKING_SERVICE') {
+                console.log(serviceName, 'serviceeeeeeeeeeeeeee');
                 if (operationName === 'FIND') {
                     data = this.userService.find(payload);
                 }
