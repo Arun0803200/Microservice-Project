@@ -1,4 +1,4 @@
-import { Body, Get, JsonController, Param, Post, Put, Res } from "routing-controllers";
+import { Body, Get, JsonController, Param, Post, Put, Req, Res } from "routing-controllers";
 import { Not } from "typeorm";
 import { Founder } from "../models/Founder";
 import { FounderService } from "../services/FounderService";
@@ -150,5 +150,14 @@ export class FounderController {
             message: 'Unable to update the Founder data !!'
         }
         return response.status(400).send(errorExample);
+    }
+
+    // Founder Details
+    @Get('/:id')
+    public async getGounderDetail(@Param('id') id: number, @Res() response: any, @Req() request: any): Promise<any> {
+        const findFounder = await this.founderService.findOne({where: {founderId: id}});
+        const status = findFounder ? 1 : 0;
+        const message = findFounder ? 'Successfully got the detail of founder' : 'Invalid founder id';
+        return response.status(findFounder? 200 : 400).send({status, message, data: findFounder ?? findFounder});
     }
 }
