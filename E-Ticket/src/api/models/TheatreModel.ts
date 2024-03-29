@@ -23,6 +23,15 @@ export class Theatre extends BaseModel{
     @Column({name: 'address_2'})
     public address2: string;
 
+    @Column({name: 'pin_code'})
+    public pinCode: number;
+
+    @Column({name: 'state_id'})
+    public stateId: number;
+
+    @Column({name: 'country_id'})
+    public countryId: number;
+
     @Column({name: 'is_active'})
     public isActive: number;
 
