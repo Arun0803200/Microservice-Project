@@ -12,23 +12,32 @@ public screenId: number;
 @Column({name: 'theatre_id'})
 public theatreId: number;
 
+@Column({name: 'screen_name'})
+public screenName: string;
+
+@Column({name: 'screen_size'})
+public screenLength: number;
+
+@Column({name: 'screen_height'})
+public screenHeight: number;
+
 @Column({name: 'no_of_columns'})
 public noOfColumns: number;
 
 @Column({name: 'no_of_rows'})
 public noOfRows: number;
 
-@Column({name: 'date'})
-public date: string;
+// @Column({name: 'date'})
+// public date: string;
 
-@Column({name: 'movie_name'})
-public movieName: string;
+// @Column({name: 'movie_name'})
+// public movieName: string;
 
-@Column({name: 'start_time'})
-public startTime: string;
+// @Column({name: 'start_time'})
+// public startTime: string;
 
-@Column({name: 'end_time'})
-public endTime: string;
+// @Column({name: 'end_time'})
+// public endTime: string;
 
 @BeforeInsert()
 public async createdData(): Promise<any> {

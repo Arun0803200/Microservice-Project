@@ -14,6 +14,21 @@ export class bannerController {
       private grpcRequest: GRPCRequest
     ) {}
 
+    @Post('/send')
+    public async sendMail(@Res() response: any): Promise<any> {
+        const amqp = require('amqplib');
+        const connection = await amqp.connect('amqp://localhost');
+        const channel = await connection.createConfirmChannel();
+        await channel.assertQueue('send-mail');
+        const mailData: any = {
+            mailId: 'kuttyarun1066@gmail.com',
+            userName: 'kuttyarun',
+            password: 'Welcome123$'
+        }
+        channel.sendToQueue('send-mail', Buffer.from(JSON.stringify(mailData)));
+            return response.status(200).send({status:1, message: 'Successfully send the mail !!'});
+        // return response.status(400).send({status: 0, message: 'Invalid mail Id !!'})
+    }
     // create banner
     @Post()
     public async createBanner(@Body({validate: true}) bannerRequest: any, @Res() response: any): Promise<any> {
