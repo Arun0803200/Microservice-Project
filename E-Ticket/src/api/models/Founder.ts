@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseModel } from './BaseModel';
 import * as moment from 'moment';
 import * as bcrypt from 'bcrypt';
+import { User } from './User';
 
 @Entity('founder')
 export class Founder extends BaseModel{
@@ -44,6 +45,9 @@ export class Founder extends BaseModel{
     @Column({name: 'username'})
     public username: string;
 
+    @Column({name: 'user_id'})
+    public userId: number;
+
     @Column({name: 'password'})
     public password: string
 
@@ -85,6 +89,10 @@ export class Founder extends BaseModel{
 
     @Column({name: 'delete_flag'})
     public deleteFlag: number;
+
+    @ManyToOne(type => User, user => user.founder)
+    @JoinColumn({name: 'user_id'})
+    public user: User
 
     @BeforeInsert()
     public async createData(): Promise<any> {

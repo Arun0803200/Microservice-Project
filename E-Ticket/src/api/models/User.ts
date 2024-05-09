@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, OneToMany } from "typeorm";
 import { BaseModel } from "./BaseModel";
 import * as moment from 'moment'
 import bcrypt = require('bcrypt');
+import { Founder } from "./Founder";
 
 @Entity('user')
 export class User extends BaseModel {
@@ -47,6 +48,9 @@ export class User extends BaseModel {
 
     @Column({name: 'delete_flag'})
     public deletFlag: number;
+
+    @OneToMany(type => Founder, founder => founder.user)
+    public founder: Founder;
 
     @BeforeInsert()
     public async createData(): Promise<any> {
